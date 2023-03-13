@@ -9,6 +9,7 @@ import ru.netology.repository.TicketRepository;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TicketManagerTest {
+    int nonexistentID = 7;
 
     TicketRepository repository = new TicketRepository();
     TicketManager manager = new TicketManager(repository);
@@ -54,6 +55,7 @@ class TicketManagerTest {
         assertArrayEquals(expected, actual);
     }
 
+
     @Test
     void shouldFindByID() {
         Ticket expected = route4;
@@ -61,11 +63,10 @@ class TicketManagerTest {
         assertEquals(expected, actual);
     }
 
+
     @Test
-    void shouldNotFindByID() {
-        Ticket expected = null;
-        Ticket actual = manager.findByID(9);
-        assertEquals(expected, actual);
+    public void shouldNotFindByID() {
+        assertNull(manager.findByID(nonexistentID));
     }
 
     @Test
@@ -79,5 +80,6 @@ class TicketManagerTest {
     @Test
     void shouldNotRemoveByID() {
         assertThrows(NotFoundException.class, () -> manager.removeByID(15));
+
     }
 }
